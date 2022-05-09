@@ -14,6 +14,11 @@ export default function counterReducer(state = initialState, action) {
         ...state,
         count: state.count - 1
       };
+    case "set-count":
+      return {
+        ...state,
+        count: action.payload
+      };
     default:
       return state;
   }
