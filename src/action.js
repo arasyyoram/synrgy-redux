@@ -13,5 +13,15 @@ const addTodo = (todo) => ({
   type: "todo/add",
   payload: todo
 });
+const deleteTodo = (todo) => ({
+  type: "todo/delete",
+  payload: todo
+});
 
-export { incrementAction, decrementAction, setCounterAction, addTodo };
+export {
+  incrementAction,
+  decrementAction,
+  setCounterAction,
+  addTodo,
+  deleteTodo
+};

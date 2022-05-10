@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo } from "./action";
+import { addTodo, deleteTodo } from "./action";
 
 const Todo = () => {
   const [input, setInput] = useState("");
@@ -19,12 +19,31 @@ const Todo = () => {
     setInput("");
   };
 
+  const deleteHandler = (id) => {
+    console.log(id);
+    const filteredTodo = todo.filter((item) => {
+      return todo.indexOf(item) !== id;
+    });
+    dispatch(deleteTodo(filteredTodo));
+  };
+
   return (
     <div>
       <h2>Todo List</h2>
       <div>
         {todo.map((item, index) => (
-          <li key={index}>{item}</li>
+          <>
+            <li key={index}>
+              {item}
+              <button
+                onClick={() => {
+                  deleteHandler(index);
+                }}
+              >
+                delete
+              </button>
+            </li>
+          </>
         ))}
       </div>
       <form onSubmit={formHandler}>

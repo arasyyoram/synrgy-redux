@@ -9,6 +9,11 @@ export default function todoReducer(state = initialState, action) {
         ...state,
         todo: [...state.todo, action.payload]
       };
+    case "todo/delete":
+      return {
+        ...state,
+        todo: [...action.payload]
+      };
     default:
       return state;
   }
