@@ -1,9 +1,11 @@
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { decrementAction, setCounterAction } from "./action";
 import { useState } from "react";
 
 function Decrement(props) {
   const [input, setInput] = useState("");
+
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     setInput(e.target.value);
@@ -12,14 +14,15 @@ function Decrement(props) {
   const formHandler = (e) => {
     e.preventDefault();
     // console.log(parseInt(input));
-    props.set(input);
+    // props.set(input);
+    dispatch(setCounterAction(input));
   };
 
   return (
     <div>
       <button
         onClick={() => {
-          props.decrementCount();
+          dispatch(decrementAction);
         }}
       >
         decrement
@@ -32,13 +35,13 @@ function Decrement(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch, state) => ({
-  decrementCount: () => {
-    dispatch(decrementAction);
-  },
-  set: (num) => {
-    dispatch(setCounterAction(num));
-  }
-});
+// const mapDispatchToProps = (dispatch, state) => ({
+//   decrementCount: () => {
+//     dispatch(decrementAction);
+//   },
+//   set: (num) => {
+//     dispatch(setCounterAction(num));
+//   }
+// });
 
-export default connect(null, mapDispatchToProps)(Decrement);
+export default Decrement;
