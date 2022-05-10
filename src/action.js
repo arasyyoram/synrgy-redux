@@ -9,4 +9,9 @@ const setCounterAction = (num) => ({
   payload: num
 });
 
-export { incrementAction, decrementAction, setCounterAction };
+const addTodo = (todo) => ({
+  type: "todo/add",
+  payload: todo
+});
+
+export { incrementAction, decrementAction, setCounterAction, addTodo };
