@@ -4,6 +4,7 @@ import { addTodo, deleteTodo } from "./action";
 
 const Todo = () => {
   const [input, setInput] = useState("");
+  const [edit, setEdit] = useState("");
 
   const todo = useSelector((state) => state.todo.todo);
   const dispatch = useDispatch();
@@ -14,17 +15,34 @@ const Todo = () => {
 
   const formHandler = (e) => {
     e.preventDefault();
-    console.log(input);
+
+    if (edit) {
+      const editIndex = todo.findIndex((item) => {
+        return item === edit;
+      });
+      const copyTodo = [...todo];
+      copyTodo[editIndex] = input;
+      console.log(copyTodo);
+      dispatch(deleteTodo(copyTodo));
+      setInput("");
+      setEdit("");
+      return;
+    }
+
     dispatch(addTodo(input));
     setInput("");
   };
 
   const deleteHandler = (id) => {
-    console.log(id);
     const filteredTodo = todo.filter((item) => {
       return todo.indexOf(item) !== id;
     });
     dispatch(deleteTodo(filteredTodo));
+  };
+
+  const editHandler = (item) => {
+    setInput(item);
+    setEdit(item);
   };
 
   return (
@@ -35,6 +53,13 @@ const Todo = () => {
           <>
             <li key={index}>
               {item}
+              <button
+                onClick={() => {
+                  editHandler(item);
+                }}
+              >
+                edit
+              </button>
               <button
                 onClick={() => {
                   deleteHandler(index);
