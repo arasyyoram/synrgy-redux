@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { incrementAction } from "./action";
 import Dec from "./Dec";
 import Todo from "./Todo";
+import Post from "./Post"
 
 function App(props) {
   const counter = useSelector((state) => state.counter.count);
@@ -21,7 +22,8 @@ function App(props) {
         increment
       </button> */}
       {/* <Dec /> */}
-      <Todo />
+      {/* <Todo /> */}
+      <Post/>
     </div>
   );
 }
